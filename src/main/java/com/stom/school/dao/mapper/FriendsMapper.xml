@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stom.school.dao.mapper.FriendsMapper" >
+  <sql id="Base_Column_List" >
+    id, user, friends, type
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.stom.school.dao.entity.Friends" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from friends
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.stom.school.dao.entity.Friends" >
+    insert into friends (id, user, friends, 
+      type)
+    values (#{id,jdbcType=BIGINT}, #{user,jdbcType=BIGINT}, #{friends,jdbcType=BIGINT}, 
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stom.school.dao.entity.Friends" >
+    insert into friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+      <if test="friends != null" >
+        friends,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=BIGINT},
+      </if>
+      <if test="friends != null" >
+        #{friends,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stom.school.dao.entity.Friends" >
+    update friends
+    <set >
+      <if test="user != null" >
+        user = #{user,jdbcType=BIGINT},
+      </if>
+      <if test="friends != null" >
+        friends = #{friends,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stom.school.dao.entity.Friends" >
+    update friends
+    set user = #{user,jdbcType=BIGINT},
+      friends = #{friends,jdbcType=BIGINT},
+      type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
